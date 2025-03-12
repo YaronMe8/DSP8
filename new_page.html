@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal with Overlapping Frames</title>
+    <style>
+      .low { background-color: red; color: white; }
+      .medium { background-color: orange; color: white; }
+      .high { background-color: green; color: white; }
+    </style>
+  </head>
+  <body>
+    <h1>STEP 1:B. Signal Analysis with Overlapping Frames</h1>
+    
+    <!-- הצגת הגרף הראשון -->
+    <h2>Signal with Overlapping Frames</h2>
+    <img src="data:image/png;base64,{{ graph1_url }}" alt="Signal with Frames">
+    
+    <!-- הצגת הגרף השני -->
+    <h2>Frame Energies</h2>
+    <img src="data:image/png;base64,{{ graph2_url }}" alt="Frame Energies">
+
+    
+    <form action="{{ url_for('vad_analysis') }}" method="get">
+        <button type="submit">View VAD Analysis</button>
+      </form>
+      <form action="{{ url_for('kmeans_analysis') }}" method="get">
+        <button type="submit">Run KMeans Analysis</button>
+    </form>
+      
+    <h2>STEP 1:C</h2>
+      
+    <!-- הצגת הטבלה -->
+    <h2>Frame Energies Table:</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Frame Number</th>
+          <th>Energy</th>
+          <th>Classification</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for frame_num, energy, classification in frame_data %}
+          <tr class="{{ classification }}">
+            <td>{{ frame_num }}</td>
+            <td>{{ energy }}</td>
+            <td>{{ classification }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
