@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Frequency Analysis</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Base Frequency Analysis</h1>
+    
+
+    <form action="{{ url_for('stft_view') }}" method="get">
+        <button type="submit">Run   STFT </button>
+    </form>
+
+    <!-- הצגת תדר הבסיס -->
+    <h2>Base Frequency: {{ base_frequency }} Hz</h2>
+    <h2>Base Amplitude: {{ base_amplitude }}</h2>
+    <h3>{{ dominant_message }}</h3>
+
+    <!-- גרף הספקטרום -->
+    <img src="data:image/png;base64,{{ graph_url }}" alt="Frequency Spectrum">
+
+    <!-- כותרת להרמוניות -->
+    <h3>Harmonics Detected:</h3>
+
+    <!-- טבלת ההרמוניות -->
+    <table>
+        <thead>
+            <tr>
+                <th>Harmonic Number</th>
+                <th>Frequency (Hz)</th>
+                <th>Amplitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for harmonic in harmonics %}
+            <tr>
+                <td>{{ harmonic.number }}</td>
+                <td>{{ harmonic.frequency|round(2) }}</td>
+                <td>{{ harmonic.amplitude|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+</body>
+</html>
