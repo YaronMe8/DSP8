@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAD Analysis</title>
+</head>
+<body>
+    <h1>STEP 1:D VAD Analysis with Classification</h1>
+    <img src="data:image/png;base64,{{ graph_url }}" alt="Graph">
+
+    <h2>Explanation:</h2>
+    <p>The classification of frames is based on energy levels:</p>
+    <ul>
+        <li><b>Hard-to-classify:</b> Frames with energy close to the threshold.</li>
+        <li><b>Easy-to-classify:</b> Frames with clear speech activity or silence.</li>
+    </ul>
+
+    <h2>Frame Classification Summary:</h2>
+    <p><b>Total Hard-to-Classify Frames:</b> {{ hard_count }}</p>
+    <p><b>Total Easy-to-Classify Frames:</b> {{ easy_count }}</p>
+    <form action="{{ url_for('kmeans_analysis') }}" method="get">
+        <button type="submit">Run KMeans Analysis</button>
+    </form>
+    <form action="{{ url_for('base_frequency') }}" method="get">
+        <button type="submit">Run  base frequency</button>
+    </form>
+    
+    
+
+    <h2>Frame Classification Table:</h2>
+    <table border="1">
+        <tr>
+            <th>Frame Number</th>
+            <th>Energy</th>
+            <th>Classification</th>
+        </tr>
+        {% for row in classifications %}
+        <tr style="background-color: {% if row['Classification'] == 'Hard' %}purple{% else %}lightgreen{% endif %}; color: white;">
+            <td>{{ row['Frame Number'] }}</td>
+            <td>{{ row['Energy'] }}</td>
+            <td>{{ row['Classification'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+   
+</body>
+</html>
