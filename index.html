@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Signal Analysis</title>
+  </head>
+  <body>
+    <h1> Project DSP, STEP 1:A</h1>
+    <img src="data:image/png;base64,{{ graph_url }}" alt="Graph">
+    
+    <h2>Formula:</h2>
+    <p>{{ formula }}</p>
+
+    <h2>Calculated Energy:</h2>
+    <p>{{ energy }}</p>
+
+    <h2>Simple rate :</h2>
+    <p>{{ sample_rate }}</p>
+
+    <h2>Signal :</h2>
+    <p>{{ signal1 }}</p>
+
+
+    
+    <!-- כפתור שיבצע הפניה לדף החדש -->
+    <form action="{{ url_for('new_page') }}" method="get">
+     <button type="submit">Go to New Page</button>
+    </form>
+   <form action="{{ url_for('vad_analysis') }}" method="get">
+    <button type="submit">View VAD Analysis</button>
+  </form>
+   <form action="{{ url_for('kmeans_analysis') }}" method="get">
+    <button type="submit">Run KMeans Analysis</button>
+  </form>
+   <form action="{{ url_for('base_frequency') }}" method="get">
+   <button type="submit">Run  base frequency</button>
+  </form>
+   <form action="{{ url_for('stft_view') }}" method="get">
+   <button type="submit">Run   STFT </button>
+  </form>
+  <form action="{{ url_for('pitch_vad_view') }}" method="get">
+    <button type="submit">Run PITCH_VAD</button>
+</form>
+<form action="{{ url_for('signal_synthesis_view') }}" method="get">
+  <button type="submit">Run Signal Synthesis</button>
+</form>
+
+
+  </body>
+</html>
