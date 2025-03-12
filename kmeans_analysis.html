@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMeans Analysis</title>
+</head>
+<body>
+    <h1>KMeans Clustering Analysis</h1>
+
+    <h2>Energy Levels and Clusters</h2>
+    <img src="data:image/png;base64,{{ graph_url }}" alt="KMeans Graph">
+
+    <h2>Cluster Summary:</h2>
+    <table border="1">
+        <tr>
+            <th>Cluster</th>
+            <th>Frame Count</th>
+            <th>Average Energy</th>
+        </tr>
+        {% for cluster, details in cluster_summary.items() %}
+        <tr>
+            <td>{{ cluster }}</td>
+            <td>{{ details['count'] }}</td>
+            <td>{{ "%.5f"|format(details['mean_energy']) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Frame Details:</h2>
+
+    </form>
+    <table border="1">
+        <tr>
+            <th>Frame Number</th>
+            <th>Energy</th>
+            <th>Cluster</th>
+        </tr>
+        {% for classification in classifications %}
+        <tr>
+            <td>{{ classification['Frame Number'] }}</td>
+            <td>{{ classification['Energy'] }}</td>
+            <td>{{ classification['Cluster'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
