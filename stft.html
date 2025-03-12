@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STFT Spectrogram Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">STFT Spectrogram Analysis</h1>
+        <h3>Sample Rate: {{ sample_rate }} Hz</h3>
+        <h3>Unique Base Frequencies Count: {{ base_frequencies_count }}</h3>
+
+        <h4 class="mt-4">Spectrogram (STFT)</h4>
+        <img src="data:image/png;base64,{{ graph_url }}" class="img-fluid" alt="STFT Spectrogram">
+
+        <h4 class="mt-4">Base Frequencies Table</h4>
+        {{ table_html|safe }}
+    </div>
+</body>
+</html>
